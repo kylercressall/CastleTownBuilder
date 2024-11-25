@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8wj1o3wkqq7x"]
+
+[ext_resource type="Texture2D" uid="uid://b1at25r0ix4g4" path="res://Assets/Card Patterns/Cottage/cottage.png" id="1_750kb"]
+[ext_resource type="LabelSettings" uid="uid://b280k6lav3tab" path="res://Assets/UI/card_title.tres" id="2_4h3gs"]
+[ext_resource type="Script" path="res://Scripts/selection_area_click.gd" id="3_2g3q5"]
+[ext_resource type="Texture2D" uid="uid://b0a1majh1nk5u" path="res://Assets/UI/selection_box.PNG" id="4_01468"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhl8u"]
+size = Vector2(179, 50)
+
+[node name="Selection" type="Node2D"]
+script = ExtResource("3_2g3q5")
+
+[node name="black backing" type="ColorRect" parent="."]
+visible = false
+z_index = -1
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 181.0
+offset_bottom = 52.0
+color = Color(0, 0, 0, 1)
+
+[node name="gray foreground" type="ColorRect" parent="."]
+visible = false
+z_index = 1
+offset_right = 179.0
+offset_bottom = 50.0
+color = Color(0.701961, 0.682353, 0.662745, 1)
+
+[node name="Building Sprite" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(23, 25)
+texture = ExtResource("1_750kb")
+
+[node name="Building Label" type="Label" parent="."]
+z_index = 2
+offset_left = 66.0
+offset_top = 10.0
+offset_right = 141.0
+offset_bottom = 38.0
+text = "Cottage- selection edit"
+label_settings = ExtResource("2_4h3gs")
+
+[node name="Selection Field" type="StaticBody2D" parent="."]
+z_index = 5
+input_pickable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Selection Field"]
+position = Vector2(89.5, 25)
+shape = SubResource("RectangleShape2D_jhl8u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(89.5, 25)
+scale = Vector2(0.333333, 0.333333)
+texture = ExtResource("4_01468")
+
+[connection signal="input_event" from="Selection Field" to="." method="_on_selection_field_input_event"]
+[connection signal="mouse_entered" from="Selection Field" to="." method="_on_selection_field_mouse_entered"]
+[connection signal="mouse_exited" from="Selection Field" to="." method="_on_selection_field_mouse_exited"]

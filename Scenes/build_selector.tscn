@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci7fvpgmaqck1"]
+
+[ext_resource type="Script" path="res://Scripts/build_selector.gd" id="1_srqxh"]
+
+[node name="Build Selector" type="Node2D"]
+script = ExtResource("1_srqxh")
+
+[node name="orange card foreground" type="ColorRect" parent="."]
+visible = false
+z_index = -2
+offset_left = -93.0
+offset_top = -61.0
+offset_right = 93.0
+offset_bottom = 20.0
+color = Color(0.733333, 0.501961, 0.266667, 1)
+
+[node name="black card border" type="ColorRect" parent="."]
+visible = false
+z_index = -5
+offset_left = -95.0
+offset_top = -64.0
+offset_right = 96.0
+offset_bottom = 23.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -86.0
+offset_top = -60.0
+offset_right = 82.0
+offset_bottom = -37.0
+text = "Choose what to build"
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = 103.0
+offset_top = -63.0
+offset_right = 273.0
+offset_bottom = -32.0
+text = "press to add selector"
+
+[node name="Button2" type="Button" parent="."]
+visible = false
+offset_left = 103.0
+offset_top = -27.0
+offset_right = 291.0
+offset_bottom = 4.0
+text = "press to reset selectors"
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="Button2" to="." method="_on_button_2_button_down"]

@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://jgf8as6mrray"]
+
+[ext_resource type="Texture2D" uid="uid://c3ln6miv0p8yn" path="res://Assets/Tiling/grid-border-1.png" id="1_ra5j2"]
+[ext_resource type="Script" path="res://Scripts/grid_tile.gd" id="1_vg5ld"]
+[ext_resource type="Texture2D" uid="uid://dv2cwptknqu6f" path="res://Assets/Tiling/green_highlight.png" id="3_4yc71"]
+[ext_resource type="Texture2D" uid="uid://dliaqffp8h7vv" path="res://Assets/Tiling/Point Counter/2point.png" id="3_ojnx8"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4cuil"]
+load_path = "res://.godot/imported/yellow_backing.png-4eb6d2680f76d4568b41227258a5a392.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fx1sk"]
+load_path = "res://.godot/imported/green_backing.png-86e5e204d8ff3344229ac10d9df675e8.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2miws"]
+size = Vector2(64, 64)
+
+[node name="Tile" type="Node2D"]
+script = ExtResource("1_vg5ld")
+
+[node name="Yellow Buildable" type="Sprite2D" parent="."]
+texture = SubResource("CompressedTexture2D_4cuil")
+
+[node name="Green Build Location" type="Sprite2D" parent="."]
+texture = SubResource("CompressedTexture2D_fx1sk")
+
+[node name="Hover Sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.423529)
+z_index = 1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ra5j2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+z_index = 2
+input_pickable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_2miws")
+
+[node name="Point Counter" type="Sprite2D" parent="."]
+z_index = 20
+z_as_relative = false
+texture_filter = 3
+position = Vector2(9.53674e-07, 9.53674e-07)
+scale = Vector2(4, 4)
+texture = ExtResource("3_ojnx8")
+
+[node name="Green Highlight" type="Sprite2D" parent="."]
+z_index = 3
+texture = ExtResource("3_4yc71")
+
+[connection signal="input_event" from="StaticBody2D" to="." method="_on_static_body_2d_input_event"]
+[connection signal="mouse_entered" from="StaticBody2D" to="." method="_on_static_body_2d_mouse_entered"]
+[connection signal="mouse_exited" from="StaticBody2D" to="." method="_on_static_body_2d_mouse_exited"]

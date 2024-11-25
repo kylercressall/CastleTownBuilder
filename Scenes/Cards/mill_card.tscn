@@ -1,0 +1,92 @@
+[gd_scene load_steps=12 format=3 uid="uid://sk7eef1esn73"]
+
+[ext_resource type="Script" path="res://Scripts/Cards/mill_card.gd" id="1_m7fca"]
+[ext_resource type="Texture2D" uid="uid://cqgn1vqxhlm7p" path="res://Assets/Card Patterns/card_base.png" id="2_iqf8g"]
+[ext_resource type="LabelSettings" uid="uid://b280k6lav3tab" path="res://Assets/UI/card_title.tres" id="4_vbdo5"]
+[ext_resource type="LabelSettings" uid="uid://c7gswn76rfcmh" path="res://Assets/UI/card_description.tres" id="5_bjbmq"]
+[ext_resource type="Texture2D" uid="uid://bejfv06ogamfa" path="res://Assets/Card Patterns/Windmill/windmill_static.png" id="6_fjsos"]
+[ext_resource type="Script" path="res://Scripts/Cards/card_sizer.gd" id="7_b4fl6"]
+[ext_resource type="Texture2D" uid="uid://c3ln6miv0p8yn" path="res://Assets/Tiling/grid-border-1.png" id="8_6vmkl"]
+[ext_resource type="Texture2D" uid="uid://bwkrxmdp1vej6" path="res://Assets/Card Patterns/rotate_arrow.png" id="9_ud01s"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k6grr"]
+load_path = "res://.godot/imported/windmill_pattern_1.PNG-460c8c8a894e1bf6beacc10344fd5bec.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y22g0"]
+size = Vector2(128, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nxhwu"]
+size = Vector2(24, 24)
+
+[node name="Windmill Card" type="Node2D"]
+script = ExtResource("1_m7fca")
+
+[node name="Card Base" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_iqf8g")
+
+[node name="Pattern" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 3
+position = Vector2(0, 18.085)
+scale = Vector2(0.223526, 0.223526)
+texture = SubResource("CompressedTexture2D_k6grr")
+
+[node name="Title" type="Label" parent="."]
+z_index = 2
+offset_left = -45.0
+offset_top = -125.0
+offset_right = 41.0
+offset_bottom = -97.0
+text = "Windmill"
+label_settings = ExtResource("4_vbdo5")
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="."]
+z_index = 2
+texture_filter = 2
+offset_left = -62.0
+offset_top = 70.0
+offset_right = 61.0
+offset_bottom = 223.0
+text = "Feeds nearby cottages and grants 1 victory point"
+label_settings = ExtResource("5_bjbmq")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Building Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -71)
+scale = Vector2(0.415619, 0.41499)
+texture = ExtResource("6_fjsos")
+
+[node name="Card Sizer" type="StaticBody2D" parent="."]
+input_pickable = true
+script = ExtResource("7_b4fl6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Card Sizer"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_y22g0")
+
+[node name="Rotate Button" type="StaticBody2D" parent="."]
+z_index = 1
+position = Vector2(-2, 35)
+input_pickable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rotate Button"]
+position = Vector2(45, -56)
+shape = SubResource("RectangleShape2D_nxhwu")
+
+[node name="Border" type="Sprite2D" parent="Rotate Button"]
+position = Vector2(45, -56)
+scale = Vector2(0.195959, 0.186449)
+texture = ExtResource("8_6vmkl")
+
+[node name="Arrow" type="Sprite2D" parent="Rotate Button"]
+position = Vector2(45, -56)
+rotation = 1.5708
+scale = Vector2(0.5441, 0.797106)
+texture = ExtResource("9_ud01s")
+
+[connection signal="mouse_entered" from="Card Sizer" to="Card Sizer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Card Sizer" to="Card Sizer" method="_on_mouse_exited"]
+[connection signal="input_event" from="Rotate Button" to="." method="_on_rotate_button_input_event"]

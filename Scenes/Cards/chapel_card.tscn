@@ -1,0 +1,91 @@
+[gd_scene load_steps=12 format=3 uid="uid://b2r4xyjpx7wwg"]
+
+[ext_resource type="Script" path="res://Scripts/Cards/chapel_card.gd" id="1_ceyce"]
+[ext_resource type="Texture2D" uid="uid://cqgn1vqxhlm7p" path="res://Assets/Card Patterns/card_base.png" id="2_hj30p"]
+[ext_resource type="Texture2D" uid="uid://dfg8304ro3vcm" path="res://Assets/Card Patterns/Chapel/chapel1.PNG" id="3_otlhq"]
+[ext_resource type="LabelSettings" uid="uid://b280k6lav3tab" path="res://Assets/UI/card_title.tres" id="4_lwgfu"]
+[ext_resource type="LabelSettings" uid="uid://c7gswn76rfcmh" path="res://Assets/UI/card_description.tres" id="5_jpcvh"]
+[ext_resource type="Texture2D" uid="uid://cychlps401eq8" path="res://Assets/Card Patterns/Chapel/full_chapel.png" id="6_dx417"]
+[ext_resource type="Script" path="res://Scripts/Cards/card_sizer.gd" id="7_a5k7h"]
+[ext_resource type="Texture2D" uid="uid://c3ln6miv0p8yn" path="res://Assets/Tiling/grid-border-1.png" id="8_bppx7"]
+[ext_resource type="Texture2D" uid="uid://bwkrxmdp1vej6" path="res://Assets/Card Patterns/rotate_arrow.png" id="9_12ywq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kc242"]
+size = Vector2(128, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikuim"]
+size = Vector2(24, 24)
+
+[node name="Chapel Card" type="Node2D"]
+script = ExtResource("1_ceyce")
+
+[node name="Card Base" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_hj30p")
+
+[node name="Pattern" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 3
+position = Vector2(0, 18)
+scale = Vector2(0.153104, 0.153104)
+texture = ExtResource("3_otlhq")
+
+[node name="Title" type="Label" parent="."]
+z_index = 2
+offset_left = -37.0
+offset_top = -122.0
+offset_right = 38.0
+offset_bottom = -94.0
+text = "Chapel"
+label_settings = ExtResource("4_lwgfu")
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="."]
+z_index = 2
+texture_filter = 2
+offset_left = -62.0
+offset_top = 63.0
+offset_right = 61.0
+offset_bottom = 216.0
+text = "Grants victory points based on how many chapels there are, may subtract.
+1/-1, 2/+3,. 3/-5, 4/+7 ..."
+label_settings = ExtResource("5_jpcvh")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Building Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -65)
+scale = Vector2(0.732888, 0.732888)
+texture = ExtResource("6_dx417")
+
+[node name="Card Sizer" type="StaticBody2D" parent="."]
+input_pickable = true
+script = ExtResource("7_a5k7h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Card Sizer"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_kc242")
+
+[node name="Rotate Button" type="StaticBody2D" parent="."]
+z_index = 1
+position = Vector2(-2, 35)
+input_pickable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rotate Button"]
+position = Vector2(45, -56)
+shape = SubResource("RectangleShape2D_ikuim")
+
+[node name="Border" type="Sprite2D" parent="Rotate Button"]
+position = Vector2(45, -56)
+scale = Vector2(0.195959, 0.186449)
+texture = ExtResource("8_bppx7")
+
+[node name="Arrow" type="Sprite2D" parent="Rotate Button"]
+position = Vector2(45, -56)
+rotation = 1.5708
+scale = Vector2(0.5441, 0.797106)
+texture = ExtResource("9_12ywq")
+
+[connection signal="mouse_entered" from="Card Sizer" to="Card Sizer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Card Sizer" to="Card Sizer" method="_on_mouse_exited"]
+[connection signal="input_event" from="Rotate Button" to="." method="_on_rotate_button_input_event"]

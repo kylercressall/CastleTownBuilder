@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhhdihbfde108"]
+
+[sub_resource type="Gradient" id="Gradient_t6g1c"]
+offsets = PackedFloat32Array(0, 0.0970018, 0.84127, 1)
+colors = PackedColorArray(0.443137, 0.772549, 0.447059, 0, 0.443137, 0.772549, 0.447059, 0.862745, 0.443137, 0.772549, 0.447059, 0.862745, 0.443137, 0.772549, 0.447059, 0)
+
+[node name="Node2D" type="CPUParticles2D"]
+scale = Vector2(0.95556, 1.02261)
+amount = 3
+lifetime = 20.0
+speed_scale = 2.0
+randomness = 0.2
+lifetime_randomness = 0.22
+direction = Vector2(-1, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 9.4
+initial_velocity_max = 9.4
+scale_amount_min = 10.0
+scale_amount_max = 14.0
+color_ramp = SubResource("Gradient_t6g1c")

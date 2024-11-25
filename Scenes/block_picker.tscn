@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://y3vju4cuecie"]
+
+[ext_resource type="Texture2D" uid="uid://cx4hsyjoh2v0g" path="res://Assets/Boxes/box-brown.png" id="1_h5vgg"]
+[ext_resource type="Script" path="res://Scripts/block_picker.gd" id="1_loh3m"]
+[ext_resource type="Texture2D" uid="uid://e5sy2hn26yix" path="res://Assets/Tiling/brown backing.png" id="2_mlysg"]
+[ext_resource type="Texture2D" uid="uid://cbnj4t6xk0nfl" path="res://Assets/Boxes/box-gray.png" id="2_vjkth"]
+[ext_resource type="Texture2D" uid="uid://bex0jmh26m01m" path="res://Assets/Boxes/box-red.png" id="4_q8mt8"]
+[ext_resource type="Texture2D" uid="uid://bfmb2mvkwwr2u" path="res://Assets/Boxes/box-blue.png" id="5_716cr"]
+[ext_resource type="Texture2D" uid="uid://b4q3yd0tvoxik" path="res://Assets/Boxes/box-yellow.png" id="7_5m10n"]
+[ext_resource type="Texture2D" uid="uid://8ac6yvv3qh65" path="res://Assets/UI/checkmark.png" id="8_e2kme"]
+
+[node name="Block Picker" type="Node2D"]
+position = Vector2(66, -195)
+script = ExtResource("1_loh3m")
+
+[node name="Card Backing" type="Sprite2D" parent="."]
+texture_filter = 3
+position = Vector2(-41.5, 7)
+scale = Vector2(0.526042, 1.10938)
+texture = ExtResource("2_mlysg")
+
+[node name="Wood" type="Button" parent="."]
+offset_left = -81.0
+offset_top = -51.0
+offset_right = -46.0
+offset_bottom = -18.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Wood"]
+texture_filter = 3
+position = Vector2(18, 17)
+texture = ExtResource("1_h5vgg")
+
+[node name="Brick" type="Button" parent="."]
+offset_left = -37.0
+offset_top = -51.0
+offset_right = -2.0
+offset_bottom = -18.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Brick"]
+texture_filter = 3
+position = Vector2(18, 17)
+texture = ExtResource("4_q8mt8")
+
+[node name="Glass" type="Button" parent="."]
+offset_left = -81.0
+offset_top = -9.0
+offset_right = -46.0
+offset_bottom = 24.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Glass"]
+texture_filter = 3
+position = Vector2(18, 17)
+texture = ExtResource("5_716cr")
+
+[node name="Stone" type="Button" parent="."]
+offset_left = -37.0
+offset_top = -9.0
+offset_right = -2.0
+offset_bottom = 24.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Stone"]
+texture_filter = 3
+position = Vector2(18, 17)
+texture = ExtResource("2_vjkth")
+
+[node name="Wheat" type="Button" parent="."]
+offset_left = -81.0
+offset_top = 32.0
+offset_right = -46.0
+offset_bottom = 65.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Wheat"]
+texture_filter = 3
+position = Vector2(18, 17)
+texture = ExtResource("7_5m10n")
+
+[node name="Confirm" type="Button" parent="."]
+offset_left = -36.0
+offset_top = 32.0
+offset_right = -1.0
+offset_bottom = 65.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Confirm"]
+texture_filter = 3
+position = Vector2(18, 17)
+texture = ExtResource("8_e2kme")
+
+[node name="Turn Number" type="Label" parent="."]
+offset_left = -95.0
+offset_top = -87.0
+offset_right = 23.0
+offset_bottom = -64.0
+text = "Turn 2"
+
+[connection signal="button_down" from="Wood" to="." method="_on_wood_button_down"]
+[connection signal="button_down" from="Brick" to="." method="_on_brick_button_down"]
+[connection signal="button_down" from="Glass" to="." method="_on_glass_button_down"]
+[connection signal="button_down" from="Stone" to="." method="_on_stone_button_down"]
+[connection signal="button_down" from="Wheat" to="." method="_on_wheat_button_down"]
+[connection signal="button_down" from="Confirm" to="." method="_on_confirm_button_down"]

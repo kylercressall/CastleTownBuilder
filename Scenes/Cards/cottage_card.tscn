@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=3 uid="uid://bvjevamu6u3j2"]
+
+[ext_resource type="Script" path="res://Scripts/Cards/cottage_card.gd" id="1_0me4s"]
+[ext_resource type="Texture2D" uid="uid://cqgn1vqxhlm7p" path="res://Assets/Card Patterns/card_base.png" id="2_gd0av"]
+[ext_resource type="Texture2D" uid="uid://eunv1w40wmee" path="res://Assets/Card Patterns/Cottage/cottage1.PNG" id="3_1mjtv"]
+[ext_resource type="LabelSettings" uid="uid://b280k6lav3tab" path="res://Assets/UI/card_title.tres" id="4_sevbu"]
+[ext_resource type="LabelSettings" uid="uid://c7gswn76rfcmh" path="res://Assets/UI/card_description.tres" id="5_r4sgy"]
+[ext_resource type="Texture2D" uid="uid://b1at25r0ix4g4" path="res://Assets/Card Patterns/Cottage/cottage.png" id="7_41tlu"]
+[ext_resource type="Script" path="res://Scripts/Cards/card_sizer.gd" id="7_ds8e0"]
+[ext_resource type="Texture2D" uid="uid://c3ln6miv0p8yn" path="res://Assets/Tiling/grid-border-1.png" id="8_h27ti"]
+[ext_resource type="Texture2D" uid="uid://bwkrxmdp1vej6" path="res://Assets/Card Patterns/rotate_arrow.png" id="9_8ekqa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_stgj8"]
+size = Vector2(128, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75itp"]
+size = Vector2(24, 24)
+
+[node name="Cottage Card" type="Node2D"]
+script = ExtResource("1_0me4s")
+
+[node name="Card Base" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_gd0av")
+
+[node name="Pattern" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 3
+position = Vector2(0, 18.085)
+scale = Vector2(0.324205, 0.324205)
+texture = ExtResource("3_1mjtv")
+
+[node name="Title" type="Label" parent="."]
+z_index = 2
+offset_left = -37.0
+offset_top = -122.0
+offset_right = 38.0
+offset_bottom = -94.0
+text = "Cottage"
+label_settings = ExtResource("4_sevbu")
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="."]
+z_index = 2
+texture_filter = 2
+offset_left = -62.0
+offset_top = 70.0
+offset_right = 61.0
+offset_bottom = 223.0
+text = "Grants 2 victory points when placed next to a mill"
+label_settings = ExtResource("5_r4sgy")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Building Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -70)
+texture = ExtResource("7_41tlu")
+
+[node name="Card Sizer" type="StaticBody2D" parent="."]
+input_pickable = true
+script = ExtResource("7_ds8e0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Card Sizer"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_stgj8")
+
+[node name="Rotate Button" type="StaticBody2D" parent="."]
+z_index = 7
+position = Vector2(-2, 35)
+input_pickable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rotate Button"]
+position = Vector2(45, -56)
+shape = SubResource("RectangleShape2D_75itp")
+
+[node name="Border" type="Sprite2D" parent="Rotate Button"]
+position = Vector2(45, -56)
+scale = Vector2(0.195959, 0.186449)
+texture = ExtResource("8_h27ti")
+
+[node name="Arrow" type="Sprite2D" parent="Rotate Button"]
+position = Vector2(45, -56)
+rotation = 1.5708
+scale = Vector2(0.5441, 0.797106)
+texture = ExtResource("9_8ekqa")
+
+[connection signal="mouse_entered" from="Card Sizer" to="Card Sizer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Card Sizer" to="Card Sizer" method="_on_mouse_exited"]
+[connection signal="input_event" from="Rotate Button" to="." method="_on_rotate_button_input_event"]
